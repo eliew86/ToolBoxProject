@@ -24,7 +24,7 @@ express()
     .use("/", express.static(__dirname + "/"))
 
     // REST endpoints
-
+    .use(require('./routes/tools'))
 
 
     // catch all endpoint
