@@ -8,6 +8,7 @@ const options = {
 };
 
 const {tools} = require("./data/tools");
+const{profiles} = require("./data/profiles")
 
 const batchImport = async () => {
 
@@ -23,6 +24,9 @@ const batchImport = async () => {
 
         // create the tools collection
         await db.collection("tools").insertMany(tools);
+
+        // create the profiles collection
+        await db.collection("profiles").insertMany(profiles);
 
         // disconnect the client
         client.close();

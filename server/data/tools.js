@@ -5,8 +5,19 @@ const tools = [
         _id: uuidv4(),
         name: "screwdriver", 
         type: "manual",
-        heavy: "false",
-        category: "handtool",
+        category: "handtool"
+    },
+    {
+        _id: uuidv4(),
+        name: "ladder",
+        type: "manual",
+        category: "tool"
+    },
+    {
+        _id: uuidv4(),
+        name: "hammer",
+        type: "manual",
+        category: "handtool"
     }
 ]
 
