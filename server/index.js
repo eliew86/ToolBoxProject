@@ -25,7 +25,7 @@ express()
 
     // REST endpoints
     .use(require('./routes/tools'))
-    .use(require('./routes/tools'))
+    .use(require('./routes/profiles'))
 
 
     // catch all endpoint

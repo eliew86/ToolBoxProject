@@ -1,14 +1,19 @@
 /**
-    Endpoints related to purchases
+    Endpoints related to tools
  */
 
-    const router = require('express').Router();
+const router = require('express').Router();
 
-    const {
-        addTool, getToolById
-    } = require("../handlers/toolsHandlers");
+const {
+    addTool, 
+    getToolById,
+    getTools,
+    getManyTools
+} = require("../handlers/toolsHandlers");
 
-    router.post("/addTools", addTool);
-    router.get("/getTool/:_id", getToolById);
+router.post("/addTools", addTool);
+router.get("/getTools/:_id", getToolById);
+router.get("/getTools", getTools);
+router.get("/getManyTools", getManyTools);
 
-    module.exports = router;
+module.exports = router;
