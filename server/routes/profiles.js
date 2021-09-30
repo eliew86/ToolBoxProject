@@ -10,6 +10,6 @@ const {
 } = require("../handlers/profileHandlers");
 
 router.post("/addProfile", addProfile);
-router.get("/getProfiles/:email", getProfileByEmail);
+router.post("/getProfile", getProfileByEmail);
 
 module.exports = router;

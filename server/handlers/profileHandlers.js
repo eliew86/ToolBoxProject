@@ -36,7 +36,7 @@ const addProfile = async (req, res) => {
             lastName,
             email,
             password,
-            _id:uuidv4()
+            _id:email
         }
 
         // add profile data to the profiles collection
@@ -54,6 +54,10 @@ const addProfile = async (req, res) => {
 // get a profile by email(for signin)
 const getProfileByEmail = async (req, res) => {
 
+    /*
+        validate password
+    */
+
     // create the client
     const client = new MongoClient(MONGO_URI, options);
 
@@ -63,13 +67,24 @@ const getProfileByEmail = async (req, res) => {
     // connect to the database
     const db = client.db("toolbox");
 
-    const { email } = req.params;
+    const { password } = req.body;
 
-    db.collection("profiles").findOne({email}, (err, result) => {
+    const { email } = req.body;
 
-        result  
-            ? res.status(200).json({status: 200, email, data: result})
-            : res.status(400).json({status: 400, email, data:"Profile not found", err});
+    db.collection("profiles").findOne({_id: email}, (err, result) => {
+
+        if(result){
+            if(result.password === password){
+
+                res.status(200).json({status: 200, email, data: result});
+            } else {
+                
+                res.status(400).json({status: 400, email, data:"username/password mismatch", err});
+            }
+        } else {
+
+            res.status(400).json({status: 400, email, data:"Profile not found", err});
+        }
         client.close();
     });
 } 

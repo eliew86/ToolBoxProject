@@ -29,7 +29,10 @@ const addTool = async (req, res) => {
             type,
             category,
             pricePerDay,
-            city
+            city,
+            imgUrl,
+            isAvailable,
+            ownerId
         } = req.body;
 
         const data = {
@@ -38,6 +41,9 @@ const addTool = async (req, res) => {
             category,
             pricePerDay,
             city,
+            imgUrl,
+            isAvailable,
+            ownerId,
             _id:uuidv4()
         }
 
