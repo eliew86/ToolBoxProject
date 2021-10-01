@@ -39,6 +39,13 @@ const addProfile = async (req, res) => {
             _id:email
         }
 
+        db.collection("profiles").findOne({_id: email}, (err, result) => {
+            
+            if(result){
+                res.status(400).json({status: 400, message: "Email already taken"})
+            } 
+        });
+
         // add profile data to the profiles collection
         await db.collection("profiles").insertOne(data);
 
