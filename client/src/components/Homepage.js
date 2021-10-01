@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Image } from "cloudinary-react";
 import Tool from "./Tool";
-import Header from "./Header";
 
 const Homepage = () => {
 
@@ -27,7 +26,6 @@ const Homepage = () => {
     return(
         <>
             <MainBody>
-                <Header />
                 {console.log("home tools", tools)}
                 {/* display tools */}
                 <div>

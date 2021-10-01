@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import Header from "./Header";
 import { useHistory } from "react-router-dom";
 
 const Login = () => {
@@ -32,7 +31,7 @@ const Login = () => {
                 // todo: maybe?
                 history.push('/')
             } else {
-                alert("Profile not found")
+                alert(data.message)
             }
         })
     }
@@ -47,7 +46,6 @@ const Login = () => {
 
     return (
         <>
-            <Header />
             <LoginWrap>
                 {
                     <>

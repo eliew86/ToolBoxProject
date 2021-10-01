@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import Header from "./Header";
 import { useHistory } from "react-router-dom";
 
 const {v4: uuidv4} = require("uuid");
@@ -55,7 +54,6 @@ const Signup = () => {
 
     return (
         <>
-            <Header />
             <SignupWrap>
             {
                 <>

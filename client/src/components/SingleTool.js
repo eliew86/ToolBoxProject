@@ -1,24 +1,40 @@
 import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 import { useHistory, useParams, Link } from "react-router-dom";
-
-import Header from "./Header";
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 
 const SingleTool = () => {
 
     const [tool, setTool] = useState(null);
     const [status, setStatus] = useState("loading");
+    const [date, setDate] = useState(new Date());
+    const [selectedDate, setSelectedDate] = useState({fromDate: null, toDate: null})
 
     let history = useHistory();
+    const user = localStorage.getItem('user');
 
     const { _id } = useParams();
+
+    const onChange = (date) => {
+
+        setDate(date);
+
+        const actualFromDate = date[0].toDateString()
+        const actualToDate = date[1].toDateString()
+        window.localStorage.setItem("fromDate", actualFromDate);
+        window.localStorage.setItem("toDate", actualToDate);
+        setSelectedDate({...selectedDate, fromDate: actualFromDate, toDate: actualToDate})
+
+        console.log("date 0", actualFromDate)
+        console.log("date 1", actualToDate)
+    }
 
     useEffect(() => {
 
         fetch(`/getTools/${_id}`)
             .then(res => res.json())
             .then(data => {
-                console.log("singleTool", data.data)
                 setTool(data.data)
                 setStatus('idle')
             })
@@ -26,7 +42,6 @@ const SingleTool = () => {
 
     return (
         <>
-            <Header />
             {
                 status === "loading" ?
                 "Loading Tool..." :
@@ -56,9 +71,23 @@ const SingleTool = () => {
                         </ToolInfoDiv>
 
                         <BtnDiv>
-                            <Btn to={`/payment/${_id}`}>Rent</Btn>
+                            {
+                                user ?
+                                selectedDate.toDate && selectedDate.fromDate && <Btn to={`/payment/${_id}`}>Rent</Btn> :
+                                <WarningSpan>
+                                    You must be loged in to rent tools
+                                </WarningSpan>
+                            }
                         </BtnDiv>
                     </ToolDiv>
+                    <CalendarDiv>
+                        <Calendar
+                            showWeekNumbers
+                            selectRange={true}
+                            onChange={onChange}
+                        />
+                        {console.log("date", Math.ceil((date[1]- date[0]) / (1000 * 60 * 60 * 24)))}
+                    </CalendarDiv>
                 </ToolInfo>
             }
             
@@ -117,6 +146,17 @@ const Btn = styled(Link)`
     font-size: 15px;
     padding: 5px 10px 7px 10px;
     border-radius: 3px;
+`;
+
+const WarningSpan = styled.span`
+
+    font-size: 15px;
+    text-decoration: underline;
+`;
+
+const CalendarDiv = styled.div`
+
+    margin-left: 100px;
 `;
 
 export default SingleTool;

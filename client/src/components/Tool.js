@@ -47,6 +47,11 @@ const ToolImg = styled.img`
 
     width: 200px;
     height: 150px;
+
+    &:hover{
+        opacity: .5;
+        transition: 0.25s;
+    }
 `;
 
 const ToolInfoDiv = styled.div`

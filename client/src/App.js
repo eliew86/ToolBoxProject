@@ -9,10 +9,12 @@ import ConfirmedUpload from "./components/ConfirmedUpload";
 import Signup from "./components/Signup";
 import SingleTool from "./components/SingleTool";
 import Payment from "./components/Payment";
+import Header from "./components/Header";
 
 function App() {
     return (
         <BrowserRouter>
+            <Header />
             <Main>
                 <Switch>
                     

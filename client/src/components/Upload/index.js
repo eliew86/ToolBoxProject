@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import Input from "./Input";
 import ImageInput from "./ImageInput";
-import Header from "../Header";
 
 const {v4: uuidv4} = require("uuid");
 const user = localStorage.getItem('user');
@@ -76,7 +75,6 @@ const Upload = () => {
         .then((res) => res.json())
         .then((data) => {
             const { status, error } = data;
-            console.log("upload user", user)
             if(user){
                 if (status === 200) {
                     window.localStorage.setItem("formData", JSON.stringify(data.data));
@@ -103,7 +101,6 @@ const Upload = () => {
         <>
 
             <MainWrap>
-                    <Header />
                     <H1logo>Upload A tool!</H1logo>
 
                     <Form onSubmit={uploadImage} className="form">

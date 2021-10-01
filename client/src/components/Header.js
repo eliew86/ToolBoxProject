@@ -29,7 +29,7 @@ const Header = () => {
                         {
                         user ? (
                         <UserLogout>
-                            <UserSpan>Id: {user}</UserSpan> 
+                            <UserSpan>User: {user}</UserSpan> 
                             <LogoutBtn onClick={handleLogout}>Logout</LogoutBtn>
                         </UserLogout>
                         ) :
@@ -115,6 +115,12 @@ const LogoutBtn = styled.button`
     border: #ff7366 solid 1px;
     border-radius: 3px;
     width: fit-content;
+    margin-top: 10px;
+
+    &:hover{
+        color: #ff1500;
+        text-decoration: underline;
+    }
 `;
 
 const UserLogout = styled.div`
