@@ -74,9 +74,7 @@ const getProfileByEmail = async (req, res) => {
     // connect to the database
     const db = client.db("toolbox");
 
-    const { password } = req.body;
-
-    const { email } = req.body;
+    const { password, email } = req.body;
 
     db.collection("profiles").findOne({_id: email}, (err, result) => {
 
@@ -90,7 +88,7 @@ const getProfileByEmail = async (req, res) => {
             }
         } else {
 
-            res.status(400).json({status: 400, email, data:"Profile not found", err});
+            res.status(400).json({status: 400, email, data: err, message:"Profile not found"});
         }
         client.close();
     });
