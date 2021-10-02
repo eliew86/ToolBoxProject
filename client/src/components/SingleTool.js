@@ -34,12 +34,14 @@ const SingleTool = () => {
 
         const actualFromDate = date[0].toDateString()
         const actualToDate = date[1].toDateString()
-        
+        const totalDaysCalc = Math.ceil((date[1]- date[0]) / (1000 * 60 * 60 * 24))
+
         setSelectedDate({...selectedDate, fromDate: actualFromDate, toDate: actualToDate})
         setTotalDays(Math.ceil((date[1]- date[0]) / (1000 * 60 * 60 * 24)))
         console.log("totaldays", totalDays)
         window.localStorage.setItem("fromDate", actualFromDate);
         window.localStorage.setItem("toDate", actualToDate);
+        window.localStorage.setItem("totalPrice", totalDaysCalc * tool.pricePerDay)
     }
     
     

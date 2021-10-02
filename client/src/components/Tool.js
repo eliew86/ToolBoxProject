@@ -49,6 +49,7 @@ const ToolImg = styled.img`
 
     width: 200px;
     height: 150px;
+    object-fit: contain;
 
     &:hover{
         opacity: .5;

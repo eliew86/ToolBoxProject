@@ -10,7 +10,8 @@ import Signup from "./components/Signup";
 import SingleTool from "./components/SingleTool";
 import Payment from "./components/Payment";
 import PaymentConfirmation from "./components/PaymentConfirmation";
-import Board from "./components/Board";
+import MyTools from "./components/MyTools";
+import MyRents from "./components/MyRents";
 
 function App() {
     return (
@@ -50,8 +51,12 @@ function App() {
                         <PaymentConfirmation />
                     </Route>
 
-                    <Route path="/board">
-                        <Board />
+                    <Route path="/mytools/:ownerId">
+                        <MyTools />
+                    </Route>
+
+                    <Route path="/myrents">
+                        <MyRents />
                     </Route>
                 </Switch>
             </Main>

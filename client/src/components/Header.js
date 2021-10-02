@@ -21,12 +21,26 @@ const Header = () => {
                 </Logo>
 
                 <Links>
+                    
+
                     <Nav1>
-                        <StyledNavLink to="/upload">Upload Tool</StyledNavLink>
+                        {
+                            user ? 
+                            <StyledNavLink to={`/mytools/${user}`}>My Tools</StyledNavLink> :
+                            ""
+                        }
                     </Nav1>
 
                     <Nav1>
-                        <StyledNavLink to="/board">Tool Board</StyledNavLink>
+                        {
+                            user ? 
+                            <StyledNavLink to={`/myrents/${user}`}>My Rents</StyledNavLink> :
+                            ""
+                        }
+                    </Nav1>
+
+                    <Nav1>
+                        <StyledNavLink to="/upload">Upload Tool</StyledNavLink>
                     </Nav1>
 
                     <LoginLoged>

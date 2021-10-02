@@ -18,7 +18,8 @@ const initialState = {
     city: "",
     imgUrl:"",
     isAvailable:true,
-    ownerId: user
+    ownerId: user,
+    renterId: ""
 }
 
 // Upload a Tool

@@ -2,14 +2,14 @@ import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 import Header from "./Header";
 
-const Board = () => {
+const MyTools = () => {
 
     return (
         <>
             <Header />
-            Tool board
+            My tools
         </>
     )
 }
 
-export default Board;
+export default MyTools;

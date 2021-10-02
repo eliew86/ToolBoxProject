@@ -32,7 +32,8 @@ const addTool = async (req, res) => {
             city,
             imgUrl,
             isAvailable,
-            ownerId
+            ownerId,
+            renterId
         } = req.body;
 
         const data = {
@@ -44,6 +45,7 @@ const addTool = async (req, res) => {
             imgUrl,
             isAvailable,
             ownerId,
+            renterId,
             _id:uuidv4()
         }
 
@@ -158,4 +160,72 @@ const getTools = async (rea, res) => {
     }
 }
 
-module.exports = { addTool, getToolById, getTools, getManyTools };
+// update tools status isAvailable
+const updateToolStatus = async (req, res) => {
+
+    // create client
+    const client = new MongoClient(MONGO_URI, options);
+
+    const { _id } = req.params;
+
+    try{
+
+        // connect client
+        await client.connect();
+
+        // connect to database
+        const db = client.db("toolbox");
+
+        const query = { _id}
+
+        // find the tool info
+        const oldInfo = await db.collection("tools").findOne(query)
+
+        const newValues = { $set: {...oldInfo, isAvailable: !oldInfo.isAvailable }}
+
+
+        await db.collection("tools").updateOne(query, newValues)
+
+        res.status(200).json({status: 200, message: "Tool status updated", ...newValues.$set})
+
+    } catch(err) {
+        res.status(500).json({status: 500, message: err.message})
+    }
+    client.close();
+}
+
+// update tool renterId
+const updateToolRenterId = async (req, res) => {
+
+    // create client
+    const client = new MongoClient(MONGO_URI, options);
+
+    const { _id } = req.params;
+
+    try{
+
+        // connect client
+        await client.connect();
+
+        // connect to database
+        const db = client.db("toolbox");
+
+        const query = { _id}
+
+        // find the tool info
+        const oldInfo = await db.collection("tools").findOne(query)
+
+        const newValues = { $set: {...oldInfo, renterId: req.body.renterId }}
+
+
+        await db.collection("tools").updateOne(query, newValues)
+
+        res.status(200).json({status: 200, message: "Renter id updated", ...newValues.$set})
+
+    } catch(err) {
+        res.status(500).json({status: 500, message: err.message})
+    }
+    client.close();
+}
+
+module.exports = { addTool, getToolById, getTools, getManyTools, updateToolStatus,updateToolRenterId };
