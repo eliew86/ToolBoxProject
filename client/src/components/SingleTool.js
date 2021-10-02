@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from "react";
 import styled from "styled-components";
-import { useHistory, useParams, Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+
+import Header from "./Header";
 
 const SingleTool = () => {
 
@@ -10,25 +12,11 @@ const SingleTool = () => {
     const [status, setStatus] = useState("loading");
     const [date, setDate] = useState(new Date());
     const [selectedDate, setSelectedDate] = useState({fromDate: null, toDate: null})
+    const [totalDays, setTotalDays] = useState(0);
 
-    let history = useHistory();
     const user = localStorage.getItem('user');
 
     const { _id } = useParams();
-
-    const onChange = (date) => {
-
-        setDate(date);
-
-        const actualFromDate = date[0].toDateString()
-        const actualToDate = date[1].toDateString()
-        window.localStorage.setItem("fromDate", actualFromDate);
-        window.localStorage.setItem("toDate", actualToDate);
-        setSelectedDate({...selectedDate, fromDate: actualFromDate, toDate: actualToDate})
-
-        console.log("date 0", actualFromDate)
-        console.log("date 1", actualToDate)
-    }
 
     useEffect(() => {
 
@@ -40,8 +28,26 @@ const SingleTool = () => {
             })
     }, [])
 
+    const onChange = (date) => {
+
+        setDate(date);
+
+        const actualFromDate = date[0].toDateString()
+        const actualToDate = date[1].toDateString()
+        
+        setSelectedDate({...selectedDate, fromDate: actualFromDate, toDate: actualToDate})
+        setTotalDays(Math.ceil((date[1]- date[0]) / (1000 * 60 * 60 * 24)))
+        console.log("totaldays", totalDays)
+        window.localStorage.setItem("fromDate", actualFromDate);
+        window.localStorage.setItem("toDate", actualToDate);
+    }
+    
+    
+    
+
     return (
-        <>
+        <>  
+            <Header />
             {
                 status === "loading" ?
                 "Loading Tool..." :
@@ -70,6 +76,15 @@ const SingleTool = () => {
                             <InfoTitleSpan>Price per day: </InfoTitleSpan>{tool.pricePerDay}$/day
                         </ToolInfoDiv>
 
+                        <ToolInfoDiv>
+                            <InfoTitleSpan>Late fees: </InfoTitleSpan>
+                            {tool.pricePerDay * 1.5}$/day
+                        </ToolInfoDiv>
+
+                        <ToolInfoDiv>
+                            <InfoTitleSpan>Total price: </InfoTitleSpan>
+                            {tool.pricePerDay * totalDays}$
+                        </ToolInfoDiv>
                         <BtnDiv>
                             {
                                 user ?
@@ -86,7 +101,6 @@ const SingleTool = () => {
                             selectRange={true}
                             onChange={onChange}
                         />
-                        {console.log("date", Math.ceil((date[1]- date[0]) / (1000 * 60 * 60 * 24)))}
                     </CalendarDiv>
                 </ToolInfo>
             }
@@ -97,6 +111,7 @@ const SingleTool = () => {
 
 const ToolInfo = styled.div`
     display: flex;
+    align-items: center;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -107,9 +122,10 @@ const ToolDiv = styled.div`
 
     display: flex;
     flex-direction: column;
-    align-items: center;
     padding: 20px;
     border-radius: 5px;
+    margin: 0 25px 0 100px;
+    width: 200px;
 `;
 
 const ToolInfoDiv = styled.div`

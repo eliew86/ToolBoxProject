@@ -2,6 +2,8 @@ import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 import { Link, useHistory } from "react-router-dom";
 
+import Header from "./Header";
+
 const Tool = ({ _id, category, city, pricePerDay, toolName, type, imgUrl}) => {
 
     let history = useHistory();

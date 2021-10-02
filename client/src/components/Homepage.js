@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Image } from "cloudinary-react";
 import Tool from "./Tool";
+import Header from "./Header";
 
 const Homepage = () => {
 
@@ -16,7 +17,6 @@ const Homepage = () => {
         fetch('/getTools')
         .then(res => res.json())
         .then(data => {
-            console.log("home data", data.data)
             setTools(data.data)
             setStatus('idle')
             })
@@ -25,6 +25,7 @@ const Homepage = () => {
 
     return(
         <>
+            <Header />
             <MainBody>
                 {console.log("home tools", tools)}
                 {/* display tools */}

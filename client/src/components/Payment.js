@@ -2,6 +2,8 @@ import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 import { useHistory, useParams } from "react-router-dom";
 
+import Header from "./Header";
+
 const initialState = {
 
     cardNumber: "",
@@ -47,8 +49,9 @@ const Payment = () => {
         .then((data) => {
             const { status, error } = data;
             if(status === 200){
+                window.localStorage.setItem("paidRent", JSON.stringify(tool));
                 setSubStatus("confirmed");
-                history.push("/paymentConfirmed");
+                history.push("/paymentConfirmation");
             } else {
                 setSubStatus("error");
                 alert(data.message);
@@ -65,6 +68,7 @@ const Payment = () => {
     return (
         
         <>  
+            <Header />
             {
                 status === "loading" ?
                 "loading" :
@@ -104,13 +108,15 @@ const Payment = () => {
                                     type="text" 
                                     name="cardNumber"
                                     placeholder="Card number"
+                                    maxLength="16"
                                     onChange={(e) => handleChangeInput(e.target.value, "cardNumber")}
                                     required
                                 />
                                 <Input 
                                     type="text"
                                     name="expirationDate"
-                                    placeholder="Expiration data"
+                                    placeholder="Expiration data (00/00)"
+                                    maxLength="5"
                                     onChange={(e) => handleChangeInput(e.target.value, "expirationDate")}
                                     required
                                 />
@@ -118,6 +124,7 @@ const Payment = () => {
                                     type="text"
                                     name="ccv"
                                     placeholder="CCV"
+                                    maxLength="3"
                                     onChange={(e) => handleChangeInput(e.target.value, "ccv")}
                                     required
                                 />

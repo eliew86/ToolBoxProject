@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import Header from "./Header";
 
 const ConfirmedUpload = () => {
 
@@ -7,7 +8,8 @@ const ConfirmedUpload = () => {
 
     console.log("confirmedUpload formData", formData);
     return (
-        <>
+        <>  
+            <Header />
             <UploadText>Upload Confirmed</UploadText>
 
             <Details>

@@ -25,6 +25,10 @@ const Header = () => {
                         <StyledNavLink to="/upload">Upload Tool</StyledNavLink>
                     </Nav1>
 
+                    <Nav1>
+                        <StyledNavLink to="/board">Tool Board</StyledNavLink>
+                    </Nav1>
+
                     <LoginLoged>
                         {
                         user ? (
@@ -67,7 +71,7 @@ const LoginLoged = styled.nav`
 const Nav1 = styled.nav`
 
     font-size: 20px;
-    margin-right: 225px;
+    margin-right: 100px;
     padding-right: 10px;
 `;
 

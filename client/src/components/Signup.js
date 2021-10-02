@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 
+import Header from "./Header";
+
 const {v4: uuidv4} = require("uuid");
 
 const initialState = {
@@ -53,7 +55,8 @@ const Signup = () => {
     };
 
     return (
-        <>
+        <>  
+            <Header />
             <SignupWrap>
             {
                 <>

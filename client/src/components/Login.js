@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 
+import Header from "./Header";
+
 const Login = () => {
 
     const user = localStorage.getItem('userId')
@@ -28,7 +30,6 @@ const Login = () => {
         .then(data => {
             if(data.status === 200) {
                 window.localStorage.setItem("user", data.data.email);
-                // todo: maybe?
                 history.push('/')
             } else {
                 alert(data.message)
@@ -45,7 +46,8 @@ const Login = () => {
     }
 
     return (
-        <>
+        <>  
+            <Header />
             <LoginWrap>
                 {
                     <>
