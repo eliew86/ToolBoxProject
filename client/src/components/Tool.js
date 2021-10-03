@@ -4,7 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 
 import Header from "./Header";
 
-const Tool = ({ _id, category, city, pricePerDay, toolName, type, imgUrl}) => {
+const Tool = ({ _id, category, city, pricePerDay, toolName, type, imgUrl, isAvailable}) => {
 
     let history = useHistory();
 
@@ -13,7 +13,8 @@ const Tool = ({ _id, category, city, pricePerDay, toolName, type, imgUrl}) => {
     }
 
     return (
-        <>
+        <>{
+            isAvailable ? 
                 <ToolDiv>
 
                     <ToolInfoDiv>
@@ -31,7 +32,9 @@ const Tool = ({ _id, category, city, pricePerDay, toolName, type, imgUrl}) => {
                     <ToolInfoDiv>
                         <ToolImg src={imgUrl} onClick={handleClick}/>
                     </ToolInfoDiv>
-                </ToolDiv>
+                </ToolDiv> :
+                ""
+            }
         </>
     )
 }

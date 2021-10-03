@@ -55,7 +55,7 @@ function App() {
                         <MyTools />
                     </Route>
 
-                    <Route path="/myrents">
+                    <Route path="/myrents/:renterId">
                         <MyRents />
                     </Route>
                 </Switch>

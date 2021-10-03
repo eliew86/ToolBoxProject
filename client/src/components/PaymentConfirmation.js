@@ -6,6 +6,8 @@ import Header from "./Header";
 const PaymentConfirmation = () => {
 
     const tool = JSON.parse(localStorage.getItem("paidRent"));
+    const totalPrice = localStorage.getItem("totalPrice");
+
     const fromDate = localStorage.getItem("fromDate");
     const toDate = localStorage.getItem("toDate");
 
@@ -36,7 +38,14 @@ const PaymentConfirmation = () => {
                 </ConfirmationDetails>
 
                 <ConfirmationDetails>
-                    <DetailsSpanReturn>Please return the tool by <TimeSpan>5pm</TimeSpan> of the last day of reservation</DetailsSpanReturn>
+                    <DetailsSpan>Total price paid: </DetailsSpan>
+                    {totalPrice} $ 
+                </ConfirmationDetails>
+
+                <ConfirmationDetails>
+                    <DetailsSpanReturn>Please return the tool by  
+                        <TimeSpan> 5pm on {toDate}</TimeSpan>  
+                    </DetailsSpanReturn>
                 </ConfirmationDetails>
             </Details>
         </>

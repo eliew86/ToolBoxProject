@@ -19,6 +19,8 @@ const Payment = () => {
     const [subStatus, setSubStatus] = useState("idle");
 
     let history = useHistory();
+    const user = localStorage.getItem('user');
+    const totalPrice = localStorage.getItem('totalPrice');
 
     const { _id } = useParams();
 
@@ -37,6 +39,7 @@ const Payment = () => {
 
         e.preventDefault();
         setSubStatus("pending");
+
         fetch("/paymentValidate", {
             method: "POST",
             body: JSON.stringify(ccFormData),
@@ -50,11 +53,29 @@ const Payment = () => {
             const { status, error } = data;
             if(status === 200){
                 window.localStorage.setItem("paidRent", JSON.stringify(tool));
-                setSubStatus("confirmed");
-                history.push("/paymentConfirmation");
             } else {
                 setSubStatus("error");
                 alert(data.message);
+            }
+        });
+
+        fetch(`/renterIdUpdate/${_id}`, {
+            method: "PUT",
+            body: JSON.stringify({renterId : user}),
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json"
+            }
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            const { status, error } = data;
+            if(status === 200){
+                setSubStatus("confirmed");
+                history.push("/paymentConfirmation");
+            } else if(error){
+                setSubStatus("error");
+                alert(error.message);
             }
         })
     }
@@ -95,6 +116,10 @@ const Payment = () => {
 
                                 <ToolInfoDiv>
                                     <InfoTitleSpan>Price per day: </InfoTitleSpan>{tool.pricePerDay}$/day
+                                </ToolInfoDiv>
+
+                                <ToolInfoDiv>
+                                    <InfoTitleSpan>Total price: </InfoTitleSpan>{totalPrice}$
                                 </ToolInfoDiv>
 
                                 <ImgDiv>

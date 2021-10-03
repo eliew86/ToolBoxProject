@@ -17,6 +17,26 @@ const ConfirmedUpload = () => {
                     <DetailsSpan>Tool name: </DetailsSpan>
                     {formData.toolName}
                 </ConfirmationDetails>
+
+                <ConfirmationDetails>
+                    <DetailsSpan>Price: </DetailsSpan>
+                    {formData.pricePerDay} $/day
+                </ConfirmationDetails>
+
+                <ConfirmationDetails>
+                    <DetailsSpan>Location: </DetailsSpan>
+                    {formData.city}
+                </ConfirmationDetails>
+
+                <ConfirmationDetails>
+                    <DetailsSpan>Uploaded by: </DetailsSpan>
+                    {formData.ownerId}
+                </ConfirmationDetails>
+
+                <ConfirmationDetails>
+                    <ToolImg src={formData.imgUrl}/>
+                </ConfirmationDetails>
+
             </Details>
         </>
     )
@@ -44,10 +64,18 @@ const Details = styled.div`
 
 const ConfirmationDetails = styled.div`
 
+    margin: 5px 15px;
 `;
 
 const DetailsSpan = styled.span`
 
+`;
+
+const ToolImg = styled.img`
+
+    width: 200px;
+    height: 150px;
+    object-fit: contain;
 `;
 
 export default ConfirmedUpload;

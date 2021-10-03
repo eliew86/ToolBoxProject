@@ -27,8 +27,6 @@ const Homepage = () => {
         <>
             <Header />
             <MainBody>
-                {console.log("home tools", tools)}
-                {/* display tools */}
                 <div>
                     {
                         <>
@@ -48,6 +46,7 @@ const Homepage = () => {
                                                     toolName={tool.toolName}
                                                     type={tool.type}
                                                     imgUrl={tool.imgUrl}
+                                                    isAvailable={tool.isAvailable}
                                                 />
                                             </React.Fragment>
                                         )

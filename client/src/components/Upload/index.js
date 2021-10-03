@@ -128,6 +128,7 @@ const Upload = () => {
                                 <option value="">Type</option>
                                 <option value="manual">Manual</option>
                                 <option value="powertool">Power tool</option>
+                                <option value="misc">Misc</option>
                             </Select>
                         </div>
 

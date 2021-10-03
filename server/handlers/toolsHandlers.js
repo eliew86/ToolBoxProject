@@ -84,6 +84,60 @@ const getToolById = async (req, res) => {
     });
 }
 
+// gets all the tools uploaded by the same user
+const getToolsByOwnerId = async (req, res) => {
+
+    // create the client
+    const client = new MongoClient(MONGO_URI, options);
+
+    // connect the client
+    await client.connect();
+
+    // connect to the database 
+    const db = client.db("toolbox");
+
+    const { ownerId } = req.params;
+
+    const tools = await db.collection("tools").find({ownerId}).toArray();
+
+    if(tools){
+
+        res.status(200).json({status: 200, data: tools});
+    } else if(err) {
+
+        res.status(400).json({status: 400, message: err.message})
+    }
+
+    client.close();
+}
+
+// get all the tools the user is renting
+const getToolsByRenterId = async (req, res) => {
+
+    // create the client
+    const client = new MongoClient(MONGO_URI, options);
+
+    // connect the client
+    await client.connect();
+
+    // connect to the database 
+    const db = client.db("toolbox");
+
+    const { renterId } = req.params;
+
+    const tools = await db.collection("tools").find({renterId}).toArray();
+
+    if(tools){
+
+        res.status(200).json({status: 200, data: tools});
+    } else if(err) {
+
+        res.status(400).json({status: 400, message: err.message})
+    }
+
+    client.close();
+}
+
 // get tools using req.query start and limit
 const getManyTools = async (req, res) => {
 
@@ -181,8 +235,7 @@ const updateToolStatus = async (req, res) => {
         // find the tool info
         const oldInfo = await db.collection("tools").findOne(query)
 
-        const newValues = { $set: {...oldInfo, isAvailable: !oldInfo.isAvailable }}
-
+        const newValues = { $set: {...oldInfo, isAvailable: !oldInfo.isAvailable, renterId: "" }}
 
         await db.collection("tools").updateOne(query, newValues)
 
@@ -215,7 +268,7 @@ const updateToolRenterId = async (req, res) => {
         // find the tool info
         const oldInfo = await db.collection("tools").findOne(query)
 
-        const newValues = { $set: {...oldInfo, renterId: req.body.renterId }}
+        const newValues = { $set: {...oldInfo, renterId: req.body.renterId, isAvailable: false }}
 
 
         await db.collection("tools").updateOne(query, newValues)
@@ -228,4 +281,4 @@ const updateToolRenterId = async (req, res) => {
     client.close();
 }
 
-module.exports = { addTool, getToolById, getTools, getManyTools, updateToolStatus,updateToolRenterId };
+module.exports = { addTool, getToolById, getTools, getToolsByOwnerId, getToolsByRenterId, getManyTools, updateToolStatus, updateToolRenterId };

@@ -45,7 +45,7 @@ const SingleTool = () => {
     }
     
     
-    
+    console.log("Payment.js tool", tool)
 
     return (
         <>  
@@ -88,12 +88,18 @@ const SingleTool = () => {
                             {tool.pricePerDay * totalDays}$
                         </ToolInfoDiv>
                         <BtnDiv>
+                            
                             {
-                                user ?
+                                user && user != tool.ownerId ?
                                 selectedDate.toDate && selectedDate.fromDate && <Btn to={`/payment/${_id}`}>Rent</Btn> :
-                                <WarningSpan>
-                                    You must be loged in to rent tools
-                                </WarningSpan>
+                                <WarningDiv>
+                                    <WarningSpanDiv>
+                                        You must be loged in to rent tools...
+                                    </WarningSpanDiv>
+                                    <WarningSpanDiv>
+                                        wait...ARE YOU REALLY TRYING TO RENT YOUR OWN TOOL 
+                                    </WarningSpanDiv>
+                                </WarningDiv>
                             }
                         </BtnDiv>
                     </ToolDiv>
@@ -166,10 +172,16 @@ const Btn = styled(Link)`
     border-radius: 3px;
 `;
 
-const WarningSpan = styled.span`
+const WarningSpanDiv = styled.div`
 
     font-size: 15px;
     text-decoration: underline;
+    margin-bottom: 10px;
+`;
+
+const WarningDiv = styled.div`
+
+
 `;
 
 const CalendarDiv = styled.div`

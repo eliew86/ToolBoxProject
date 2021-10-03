@@ -31,6 +31,7 @@ const Login = () => {
             if(data.status === 200) {
                 window.localStorage.setItem("user", data.data.email);
                 history.push('/')
+                window.location.reload();
             } else {
                 alert(data.message)
             }
