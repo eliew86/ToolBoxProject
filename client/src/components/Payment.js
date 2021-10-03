@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 import { useHistory, useParams } from "react-router-dom";
-
+import background from "../img/background.jpg";
 import Header from "./Header";
 
 const initialState = {
@@ -17,6 +17,7 @@ const Payment = () => {
     const [status, setStatus] = useState("loading");
     const [ccFormData, setCcFormData] = useState(initialState);
     const [subStatus, setSubStatus] = useState("idle");
+    // const [flag, setFlag ] = useState(false);
 
     let history = useHistory();
     const user = localStorage.getItem('user');
@@ -53,31 +54,33 @@ const Payment = () => {
             const { status, error } = data;
             if(status === 200){
                 window.localStorage.setItem("paidRent", JSON.stringify(tool));
+                
+                fetch(`/renterIdUpdate/${_id}`, {
+                    method: "PATCH",
+                    body: JSON.stringify({renterId : user}),
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json"
+                    }
+                })
+                .then((res) => res.json())
+                .then((data) => {
+                    const { status, error } = data;
+                    if(status === 200){
+                        setSubStatus("confirmed");
+                        history.push("/paymentConfirmation");
+                    } else if(error){
+                        setSubStatus("error");
+                        alert(error.message);
+                    }
+                })
             } else {
                 setSubStatus("error");
                 alert(data.message);
             }
         });
 
-        fetch(`/renterIdUpdate/${_id}`, {
-            method: "PATCH",
-            body: JSON.stringify({renterId : user}),
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json"
-            }
-        })
-        .then((res) => res.json())
-        .then((data) => {
-            const { status, error } = data;
-            if(status === 200){
-                setSubStatus("confirmed");
-                history.push("/paymentConfirmation");
-            } else if(error){
-                setSubStatus("error");
-                alert(error.message);
-            }
-        })
+            
     }
 
     const handleChangeInput = (value, name) => {
@@ -88,7 +91,7 @@ const Payment = () => {
 
     return (
         
-        <>  
+        <Wrapper>  
             <Header />
             {
                 status === "loading" ?
@@ -141,6 +144,7 @@ const Payment = () => {
                                     type="text"
                                     name="expirationDate"
                                     placeholder="Expiration data (00/00)"
+                                    minLength="4"
                                     maxLength="5"
                                     onChange={(e) => handleChangeInput(e.target.value, "expirationDate")}
                                     required
@@ -149,6 +153,7 @@ const Payment = () => {
                                     type="text"
                                     name="ccv"
                                     placeholder="CCV"
+                                    minLength="3"
                                     maxLength="3"
                                     onChange={(e) => handleChangeInput(e.target.value, "ccv")}
                                     required
@@ -160,9 +165,16 @@ const Payment = () => {
                     </PaymentDiv>
                 </>
             }
-        </>
+        </Wrapper>
     )
 }
+
+const Wrapper = styled.div`
+
+    background-image: url(${background});
+    background-size: cover;
+    height: 100vh;
+`;
 
 const PaymentDiv = styled.div`
 

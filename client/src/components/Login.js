@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
+import background from "../img/background.jpg";
 
 import Header from "./Header";
 
@@ -47,7 +48,7 @@ const Login = () => {
     }
 
     return (
-        <>  
+        <Wrapper>  
             <Header />
             <LoginWrap>
                 {
@@ -62,9 +63,16 @@ const Login = () => {
                     </>
                 }
             </LoginWrap>
-        </>
+        </Wrapper>
     )
 }
+
+const Wrapper = styled.div`
+
+    background-image: url(${background});
+    background-size: cover;
+    height: 100vh;
+`;
 
 const LoginWrap = styled.div`
 

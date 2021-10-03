@@ -64,7 +64,7 @@ const Homepage = () => {
 
 const Wrapper = styled.div`
 
-    /* background-image: url(${background}); */
+    background-image: url(${background});
     background-size: cover;
     height: 100vh;
     

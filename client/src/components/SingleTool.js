@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useParams, Link } from "react-router-dom";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import background from "../img/background.jpg";
 
 import Header from "./Header";
 
@@ -48,7 +49,7 @@ const SingleTool = () => {
     console.log("Payment.js tool", tool)
 
     return (
-        <>  
+        <Wrapper>  
             <Header />
             {
                 status === "loading" ?
@@ -113,9 +114,16 @@ const SingleTool = () => {
                 </ToolInfo>
             }
             
-        </>
+        </Wrapper>
     )
 }
+
+const Wrapper = styled.div`
+
+    background-image: url(${background});
+    background-size: cover;
+    height: 100vh;
+`;
 
 const ToolInfo = styled.div`
     display: flex;
