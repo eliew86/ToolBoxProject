@@ -60,6 +60,8 @@ const Signup = () => {
             <SignupWrap>
             {
                 <>
+                    <ToolsSpanDiv>Create a profile</ToolsSpanDiv>
+
                     <SignupForm onSubmit={handleSubmit}>
                         <SignupInput 
                             type="text" 
@@ -99,6 +101,14 @@ const SignupWrap = styled.div`
 
 `;
 
+const ToolsSpanDiv = styled.h1`
+
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 150px 0;
+`;
+
 const SignupForm = styled.form`
 
     display: flex;
@@ -108,7 +118,8 @@ const SignupForm = styled.form`
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    border: black solid 1px;
+    border: solid 8px;
+    border-image: linear-gradient(to top, black, #ff7366)1;
     padding: 15px;
     border-radius: 5px;
 `;
@@ -120,6 +131,14 @@ const SignupInput = styled.input`
 
 const SubmitInput = styled.input`
 
+width: fit-content;
+
+    background-color: black;
+    color: #ff7366;
+    border: none;
+    font-size: 15px;
+    padding: 5px 10px 7px 10px;
+    border-radius: 3px;
     width: fit-content;
 `;
 

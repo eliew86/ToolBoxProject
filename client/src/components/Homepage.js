@@ -1,9 +1,9 @@
 import { load } from "dotenv";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Image } from "cloudinary-react";
 import Tool from "./Tool";
 import Header from "./Header";
+import background from "../img/background.jpg";
 
 const Homepage = () => {
 
@@ -24,7 +24,7 @@ const Homepage = () => {
     }, [])
 
     return(
-        <>
+        <Wrapper>
             <Header />
             <MainBody>
                 <div>
@@ -58,9 +58,17 @@ const Homepage = () => {
                     }
                 </div>
             </MainBody>
-        </>
+        </Wrapper>
     )
 }
+
+const Wrapper = styled.div`
+
+    /* background-image: url(${background}); */
+    background-size: cover;
+    height: 100vh;
+    
+`;
 
 const MainBody = styled.div`
 
@@ -87,6 +95,7 @@ const ToolsDiv = styled.div`
     left: 20%;
     top: 125px;
     margin-right: 0;
+    color: black;
 `;
 
 export default Homepage;

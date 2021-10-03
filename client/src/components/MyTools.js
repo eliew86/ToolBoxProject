@@ -32,6 +32,7 @@ const MyTools = () => {
             <ToolsSpanDiv>My tools</ToolsSpanDiv>
             <ToolsDiv>
                 {
+                    tools.length ? 
                     tools.map(tool => {
 
                         return(
@@ -67,7 +68,7 @@ const MyTools = () => {
                                                     setSubStatus("pending");
                                                     
                                                     fetch(`/toolStatus/${_id}`, {
-                                                        method: "PUT"
+                                                        method: "PATCH"
                                                     })
                                                     .then((res) => res.json())
                                                     .then((data) => {
@@ -89,7 +90,10 @@ const MyTools = () => {
                                 </ToolDiv>
                             </React.Fragment>
                         )
-                    })
+                    }) :
+                    <NotRenting>
+                        You have no tools up for rent
+                    </NotRenting>
                 }
             </ToolsDiv>
         </>
@@ -120,7 +124,8 @@ const ToolDiv = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: solid 2px black;
+    border: solid 8px;
+    border-image: linear-gradient(to left, black, #ff7366) 1 0;
     width: fit-content;
     margin: 100px 0 10px 75px;
 `;
@@ -150,6 +155,15 @@ const Btn = styled.button`
     padding: 5px 10px 7px 10px;
     border-radius: 3px;
     margin-bottom: 10px;
+`;
+
+const NotRenting = styled.div`
+
+    position: absolute;
+    margin-top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 25px;
 `;
 
 export default MyTools;

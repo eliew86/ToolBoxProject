@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from "react";
 import styled from "styled-components";
-import { Link, useHistory } from "react-router-dom";
-
-import Header from "./Header";
+import { useHistory } from "react-router-dom";
 
 const Tool = ({ _id, category, city, pricePerDay, toolName, type, imgUrl, isAvailable}) => {
 
@@ -13,39 +11,45 @@ const Tool = ({ _id, category, city, pricePerDay, toolName, type, imgUrl, isAvai
     }
 
     return (
-        <>{
-            isAvailable ? 
-                <ToolDiv>
+        <Wrapper>
+            {
+                isAvailable ? 
+                    <ToolDiv>
 
-                    <ToolInfoDiv>
-                        {toolName}
-                    </ToolInfoDiv>
+                        <ToolInfoDiv>
+                            Name: {toolName}
+                        </ToolInfoDiv>
 
-                    <ToolInfoDiv>
-                        {pricePerDay}$/day
-                    </ToolInfoDiv>
+                        <ToolInfoDiv>
+                            {pricePerDay}$/day
+                        </ToolInfoDiv>
 
-                    <ToolInfoDiv>
-                        where: {city}
-                    </ToolInfoDiv>
+                        <ToolInfoDiv>
+                            where: {city}
+                        </ToolInfoDiv>
 
-                    <ToolInfoDiv>
-                        <ToolImg src={imgUrl} onClick={handleClick}/>
-                    </ToolInfoDiv>
-                </ToolDiv> :
-                ""
+                        <ToolInfoDiv>
+                            <ToolImg src={imgUrl} onClick={handleClick}/>
+                        </ToolInfoDiv>
+                    </ToolDiv> :
+                    ""
             }
-        </>
+        </Wrapper>
     )
 }
+
+const Wrapper = styled.div`
+
+`;
 
 const ToolDiv = styled.div`
 
     display: flex;
     flex-direction: column;
-    border: solid 2px black;
+    border: solid 8px;
+    border-image: linear-gradient(to left, black, #ff7366) 1 0;
     width: fit-content;
-    margin: 100px 0 10px 75px;
+    margin: 100px 50px 10px 75px;
 `;
 
 const ToolImg = styled.img`

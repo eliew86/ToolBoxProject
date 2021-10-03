@@ -181,16 +181,23 @@ const Form = styled.form`
     position: absolute;
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    /* border: black solid 1px; */
+    border: solid 8px;
+    border-image: linear-gradient(to top, black, #ff7366) 1;
+    padding: 30px;
 `;
 
 const Submit = styled.button`
 
     width: fit-content;
+    background-color: black;
+    color: #ff7366;
+    border: none;
+    font-size: 15px;
+    padding: 5px 10px 7px 10px;
+    border-radius: 3px;
 `;
 
 const H1logo = styled.h1`
@@ -198,6 +205,7 @@ const H1logo = styled.h1`
     position: absolute;
     left: 50%;
     transform: translate(-50%, -50%);
+    top: 125px;
 `;
 
 const Select = styled.select`

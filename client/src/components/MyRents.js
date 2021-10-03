@@ -30,6 +30,7 @@ const MyRents = () => {
             <ToolsSpanDiv>Currently Renting</ToolsSpanDiv>
             <ToolsDiv>
             {
+                tools.length ?
                 tools.map(tool => {
 
                     return(
@@ -60,7 +61,11 @@ const MyRents = () => {
                             </ToolDiv>
                         </React.Fragment>
                     )
-                })
+                }) :
+
+                <NotRenting>
+                    You're not currently renting any tools
+                </NotRenting>
             }
             </ToolsDiv>
         </>
@@ -91,7 +96,8 @@ const ToolDiv = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: solid 2px black;
+    border: solid 8px;
+    border-image: linear-gradient(to left, black, #ff7366) 1 0;
     width: fit-content;
     margin: 100px 0 10px 75px;
 `;
@@ -114,4 +120,12 @@ const ToolImg = styled.img`
     object-fit: contain;
 `;
 
+const NotRenting = styled.div`
+
+    position: absolute;
+    margin-top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 25px;
+`;
 export default MyRents;

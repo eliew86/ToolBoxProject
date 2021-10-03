@@ -40,7 +40,11 @@ const Header = () => {
                     </Nav1>
 
                     <Nav1>
-                        <StyledNavLink to="/upload">Upload Tool</StyledNavLink>
+                        {
+                            user ? 
+                            <StyledNavLink to="/upload">Upload Tool</StyledNavLink> :
+                            ""
+                        }
                     </Nav1>
 
                     <LoginLoged>
@@ -68,6 +72,7 @@ const Wrapper = styled.header`
     align-items: center;
     justify-content: space-between;
     background-color: rgb(0, 0, 0);
+    margin-top: 0;
 `;
 
 const Logo = styled.div`

@@ -130,10 +130,13 @@ const ToolDiv = styled.div`
 
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    padding: 30px;
+    border: solid 8px;
+    border-image: linear-gradient(to top, black, #ff7366)1;
     border-radius: 5px;
     margin: 0 25px 0 100px;
     width: 200px;
+    align-items: center;
 `;
 
 const ToolInfoDiv = styled.div`

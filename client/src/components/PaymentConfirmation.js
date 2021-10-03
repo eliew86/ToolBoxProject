@@ -69,7 +69,8 @@ const Details = styled.div`
     top: 50%;
     transform: translate(-50%, -50%);
     padding: 20px;
-    border: black solid 2px;
+    border: solid 8px;
+    border-image: linear-gradient(to right, black, orange) 1 0;
 `;
 
 const ConfirmationDetails = styled.div`

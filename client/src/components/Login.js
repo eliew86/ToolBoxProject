@@ -52,6 +52,8 @@ const Login = () => {
             <LoginWrap>
                 {
                     <>
+                        <ToolsSpanDiv>Login</ToolsSpanDiv>
+
                         <SigninForm onSubmit={handleSubmit}>
                             <SigninInput  onChange={handleChangeId} type="text" placeholder="E-mail"/>
                             <SigninInput onChange={handleChangePw} type="password" placeholder="Password"/>
@@ -68,6 +70,14 @@ const LoginWrap = styled.div`
 
 `;
 
+const ToolsSpanDiv = styled.h1`
+
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 150px 0;
+`;
+
 const SigninForm = styled.form`
 
     display: flex;
@@ -77,7 +87,8 @@ const SigninForm = styled.form`
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    border: black solid 1px;
+    border: solid 8px;
+    border-image: linear-gradient(to top, black, #ff7366)1;
     padding: 15px;
     border-radius: 5px;
 `;
@@ -85,6 +96,12 @@ const SigninForm = styled.form`
 const SubmitInput = styled.input`
 
     width: fit-content;
+    background-color: black;
+    color: #ff7366;
+    border: none;
+    font-size: 15px;
+    padding: 5px 10px 7px 10px;
+    border-radius: 3px;
 `;
 
 const SigninInput = styled.input`

@@ -60,7 +60,7 @@ const Payment = () => {
         });
 
         fetch(`/renterIdUpdate/${_id}`, {
-            method: "PUT",
+            method: "PATCH",
             body: JSON.stringify({renterId : user}),
             headers: {
                 Accept: "application/json",
@@ -176,11 +176,17 @@ const PaymentDiv = styled.div`
 const ToolInfo = styled.div`
 
     margin-right: 50px;
+    padding: 30px;
+    border: solid 8px;
+    border-image: linear-gradient(to top, black, orange) 1 0 0 1;
 `;
 
 const PaymentInfo = styled.div`
 
     margin-left: 50px;
+    padding: 30px;
+    border: solid 8px;
+    border-image: linear-gradient(to top, black, orange) 0 1 1 0;
 `;
 
 const ToolInfoDiv = styled.div`
@@ -214,12 +220,19 @@ const Form = styled.form`
 
 const Input = styled.input`
 
-    margin-bottom: 25px;
+    margin-bottom: 35px;
 `;
 
 const Submit = styled.button`
 
     width: fit-content;
+    background-color: black;
+    color: #ff7366;
+    border: none;
+    font-size: 15px;
+    padding: 5px 10px 7px 10px;
+    border-radius: 3px;
+    margin-top: 75px;
 `;
 
 export default Payment;
