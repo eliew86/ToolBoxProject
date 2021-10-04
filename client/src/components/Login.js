@@ -69,9 +69,6 @@ const Login = () => {
 
 const Wrapper = styled.div`
 
-    background-image: url(${background});
-    background-size: cover;
-    height: 100vh;
 `;
 
 const LoginWrap = styled.div`

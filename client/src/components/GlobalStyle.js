@@ -11,8 +11,10 @@ const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
         margin: 0;
         background-image: url(${background});
+        background-color: black;
         background-size: cover;
         height: 100vh;
+        background-attachment: fixed;
     }
 `;
 

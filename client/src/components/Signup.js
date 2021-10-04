@@ -100,9 +100,6 @@ const Signup = () => {
 
 const Wrapper = styled.div`
 
-    background-image: url(${background});
-    background-size: cover;
-    height: 100vh;
 `;
 
 const SignupWrap = styled.div`

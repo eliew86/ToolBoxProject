@@ -15,7 +15,7 @@ const Header = () => {
         window.location.reload();
     }
 
-    return  <Wrapper>
+    return  <Wrapper >
                 <Logo>
                     <h1><StyledNavLink to="/">Toolbux</StyledNavLink></h1>
                 </Logo>
@@ -74,6 +74,9 @@ const Wrapper = styled.header`
     background-color: rgb(0, 0, 0);
     margin-top: 0;
     padding: 15px 0;
+    position: fixed;
+    width: 100%;
+    z-index: 10;
 `;
 
 const Logo = styled.div`

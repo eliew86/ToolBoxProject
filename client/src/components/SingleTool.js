@@ -120,9 +120,6 @@ const SingleTool = () => {
 
 const Wrapper = styled.div`
 
-    background-image: url(${background});
-    background-size: cover;
-    height: 100vh;
 `;
 
 const ToolInfo = styled.div`
@@ -143,7 +140,7 @@ const ToolDiv = styled.div`
     border-image: linear-gradient(to top, black, #ff7366)1;
     border-radius: 5px;
     margin: 0 25px 0 100px;
-    width: 200px;
+    width: 300px;
     align-items: center;
 `;
 

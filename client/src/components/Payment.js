@@ -175,9 +175,6 @@ const Payment = () => {
 
 const Wrapper = styled.div`
 
-    background-image: url(${background});
-    background-size: cover;
-    height: 100vh;
 `;
 
 const PaymentDiv = styled.div`

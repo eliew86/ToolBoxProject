@@ -68,6 +68,8 @@ const MyTools = () => {
                                         {
                                             !tool.isAvailable ? 
                                             <Btn onClick={
+                                                // the owner can update the tool availability manually
+                                                // when the tool rental period is over or if the tool was returned earlier
                                                 (e) => {
         
                                                     const _id = tool._id;
@@ -95,9 +97,7 @@ const MyTools = () => {
                                             }>Make Available</Btn> :
                                             ""
                                         }
-                                    </BtnDiv>
 
-                                    <BtnDiv>
                                         <Btn onClick={
                                             // delete the item from the "tools" collection
                                             // I'm doing it here because I have direct access to the tool _id 
@@ -139,9 +139,6 @@ const MyTools = () => {
 
 const Wrapper = styled.div`
 
-    background-image: url(${background});
-    background-size: cover;
-    height: 100vh;
 `;
 
 const ToolsDiv = styled.div`
@@ -198,7 +195,7 @@ const Btn = styled.button`
     font-size: 15px;
     padding: 5px 10px 7px 10px;
     border-radius: 3px;
-    margin-bottom: 10px;
+    margin: 10px 15px;
 `;
 
 const NotRenting = styled.div`
