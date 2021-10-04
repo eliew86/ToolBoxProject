@@ -2,6 +2,8 @@ import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import Header from "./Header";
+import background from "../img/background.jpg";
+
 
 const MyRents = () => {
 
@@ -25,7 +27,7 @@ const MyRents = () => {
     }, [])
 
     return (
-        <>
+        <Wrapper>
             <Header />
             <ToolsSpanDiv>Currently Renting</ToolsSpanDiv>
             <ToolsDiv>
@@ -51,6 +53,10 @@ const MyRents = () => {
                                 </ToolInfoDiv>
 
                                 <ToolInfoDiv>
+                                    Return Date: {tool.toDate}
+                                </ToolInfoDiv>
+
+                                <ToolInfoDiv>
                                     <ToolImg src={tool.imgUrl}/>
                                 </ToolInfoDiv>
 
@@ -68,9 +74,16 @@ const MyRents = () => {
                 </NotRenting>
             }
             </ToolsDiv>
-        </>
+        </Wrapper>
     )
 }
+
+const Wrapper = styled.div`
+
+    background-image: url(${background});
+    background-size: cover;
+    height: 100vh;
+`;
 
 const ToolsDiv = styled.div`
 

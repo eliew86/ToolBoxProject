@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
-import Input from "./Input";
-import ImageInput from "./ImageInput";
-import Header from "../Header";
+import Header from "./Header";
+import background from "../img/background.jpg";
 
 const {v4: uuidv4} = require("uuid");
 const user = localStorage.getItem('user');
@@ -19,7 +18,8 @@ const initialState = {
     imgUrl:"",
     isAvailable:true,
     ownerId: user,
-    renterId: ""
+    renterId: "",
+    toDate: ""
 }
 
 // Upload a Tool
@@ -100,7 +100,7 @@ const Upload = () => {
     };
     
     return (
-        <>
+        <Wrapper>
 
             <Header />
             <MainWrap>
@@ -109,7 +109,11 @@ const Upload = () => {
                     <Form onSubmit={uploadImage} className="form">
 
                         <div>
-                        <ImageInput />
+                        <Input 
+                            type="file" 
+                            name="image"
+                            required
+                        />
                         </div>
 
                         <div>
@@ -117,7 +121,7 @@ const Upload = () => {
                                 name="toolName"
                                 type="text"
                                 placeholder="Tool name"
-                                handleChangeInput={handleChangeInput}
+                                onChange={(ev) => handleChangeInput(ev.target.value, "toolName")}
                             />
                         </div>
 
@@ -149,28 +153,37 @@ const Upload = () => {
                                 name="pricePerDay"
                                 type="text"
                                 placeholder="Price per day"
-                                handleChangeInput={handleChangeInput}
+                                onChange={(ev) => handleChangeInput(ev.target.value, "pricePerDay")}
                             />
                             <Ppd>$/day</Ppd>
                         </div>
 
-                        <div>
+                        <CityInput>
                             <Input 
                                 name="city"
                                 type="text"
                                 placeholder="City"
-                                handleChangeInput={handleChangeInput}
+                                onChange={(ev) => handleChangeInput(ev.target.value, "city")}
                             />
-                        </div>
+                        </CityInput>
 
-                        <Submit className="btn" type="submit">Submit</Submit>
+                        <SubmitBtn>
+                            <Submit className="btn" type="submit">Submit</Submit>
+                        </SubmitBtn>
                     </Form>
 
             </MainWrap>
-        </>
+        </Wrapper>
     )
 
 }
+
+const Wrapper = styled.div`
+
+    background-image: url(${background});
+    background-size: cover;
+    height: 100vh;
+`;
 
 const MainWrap = styled.div`
 
@@ -189,6 +202,11 @@ const Form = styled.form`
     padding: 30px;
 `;
 
+const Input = styled.input`
+
+    margin-bottom: 15px;
+`;
+
 const Submit = styled.button`
 
     width: fit-content;
@@ -198,6 +216,8 @@ const Submit = styled.button`
     font-size: 15px;
     padding: 5px 10px 7px 10px;
     border-radius: 3px;
+    position: absolute;
+    left: 40%;
 `;
 
 const H1logo = styled.h1`
@@ -216,6 +236,17 @@ const Select = styled.select`
 const Ppd = styled.span`
 
     margin-left: 10px;
+`;
+
+const SubmitBtn = styled.div`
+
+    display: flex;
+    align-items: center;
+`;
+
+const CityInput = styled.div`
+
+    margin-bottom: 35px;
 `;
 
 export default Upload;

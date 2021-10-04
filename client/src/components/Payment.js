@@ -21,6 +21,7 @@ const Payment = () => {
 
     let history = useHistory();
     const user = localStorage.getItem('user');
+    const toDate = localStorage.getItem('toDate');
     const totalPrice = localStorage.getItem('totalPrice');
 
     const { _id } = useParams();
@@ -54,10 +55,13 @@ const Payment = () => {
             const { status, error } = data;
             if(status === 200){
                 window.localStorage.setItem("paidRent", JSON.stringify(tool));
-                
+
                 fetch(`/renterIdUpdate/${_id}`, {
                     method: "PATCH",
-                    body: JSON.stringify({renterId : user}),
+                    body: JSON.stringify({
+                        renterId : user,
+                        toDate: toDate
+                    }),
                     headers: {
                         Accept: "application/json",
                         "Content-Type": "application/json"

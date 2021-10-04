@@ -73,6 +73,7 @@ const Wrapper = styled.header`
     justify-content: space-between;
     background-color: rgb(0, 0, 0);
     margin-top: 0;
+    padding: 15px 0;
 `;
 
 const Logo = styled.div`

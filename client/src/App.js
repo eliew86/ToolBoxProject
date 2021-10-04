@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import styled from "styled-components";
 
 import Homepage from "./components/Homepage";
-import Upload from "./components/Upload/index";
+import Upload from "./components/Upload";
 import Login from "./components/Login";
 import ConfirmedUpload from "./components/ConfirmedUpload";
 import Signup from "./components/Signup";
@@ -12,10 +12,12 @@ import Payment from "./components/Payment";
 import PaymentConfirmation from "./components/PaymentConfirmation";
 import MyTools from "./components/MyTools";
 import MyRents from "./components/MyRents";
+import GlobalStyle from "./components/GlobalStyle";
 
 function App() {
     return (
         <BrowserRouter>
+        <GlobalStyle />
             <Main>
                 <Switch>
                     

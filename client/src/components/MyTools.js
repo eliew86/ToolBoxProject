@@ -2,6 +2,8 @@ import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import Header from "./Header";
+import background from "../img/background.jpg";
+
 
 const MyTools = () => {
 
@@ -26,7 +28,7 @@ const MyTools = () => {
 
 
     return (
-        <>
+        <Wrapper>
             <Header />
             
             <ToolsSpanDiv>My tools</ToolsSpanDiv>
@@ -96,9 +98,16 @@ const MyTools = () => {
                     </NotRenting>
                 }
             </ToolsDiv>
-        </>
+        </Wrapper>
     )
 }
+
+const Wrapper = styled.div`
+
+    background-image: url(${background});
+    background-size: cover;
+    height: 100vh;
+`;
 
 const ToolsDiv = styled.div`
 

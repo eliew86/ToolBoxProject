@@ -33,7 +33,8 @@ const addTool = async (req, res) => {
             imgUrl,
             isAvailable,
             ownerId,
-            renterId
+            renterId,
+            toDate
         } = req.body;
 
         const data = {
@@ -46,10 +47,12 @@ const addTool = async (req, res) => {
             isAvailable,
             ownerId,
             renterId,
+            toDate,
             _id:uuidv4()
         }
 
         // add tool data to the tools collection
+        console.log("toolshandler", data);
         await db.collection("tools").insertOne(data);
 
         res.status(200).json({status: 200, message: "Tool added successfully", data: data});
@@ -235,7 +238,7 @@ const updateToolStatus = async (req, res) => {
         // find the tool info
         const oldInfo = await db.collection("tools").findOne(query)
 
-        const newValues = { $set: {...oldInfo, isAvailable: !oldInfo.isAvailable, renterId: "" }}
+        const newValues = { $set: {...oldInfo, isAvailable: !oldInfo.isAvailable, renterId: "", toDate: "" }}
 
         await db.collection("tools").updateOne(query, newValues)
 
@@ -268,7 +271,7 @@ const updateToolRenterId = async (req, res) => {
         // find the tool info
         const oldInfo = await db.collection("tools").findOne(query)
 
-        const newValues = { $set: {...oldInfo, renterId: req.body.renterId, isAvailable: false }}
+        const newValues = { $set: {...oldInfo, renterId: req.body.renterId, isAvailable: false, toDate: req.body.toDate }}
 
 
         await db.collection("tools").updateOne(query, newValues)
