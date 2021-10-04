@@ -12,6 +12,8 @@ const MyTools = () => {
     const [subStatus, setSubStatus] = useState("idle");
 
     const { ownerId } = useParams();
+    const { _id } = useParams();
+    console.log("tools", tools)
 
     useEffect(() => {
 
@@ -26,6 +28,11 @@ const MyTools = () => {
         .catch(error => console.log("home fetch error: ", error))
     }, [])
 
+    const removeTool = (e) => {
+
+
+        
+    }
 
     return (
         <Wrapper>
@@ -88,6 +95,34 @@ const MyTools = () => {
                                             }>Make Available</Btn> :
                                             ""
                                         }
+                                    </BtnDiv>
+
+                                    <BtnDiv>
+                                        <Btn onClick={
+                                            // delete the item from the "tools" collection
+                                            // I'm doing it here because I have direct access to the tool _id 
+                                            (e) => {
+                                                e.preventDefault();
+                                                setSubStatus("pending");
+
+                                                fetch(`/deleteTool/${tool._id}`,
+                                                { 
+                                                    method: "DELETE"
+                                                }
+                                                )
+                                                .then(res => res.json())
+                                                .then((data) => {
+                                                    const { status, error } = data;
+                                                    if (status === 200) {
+                                                        setSubStatus("confirmed");
+                                                        window.location.reload();
+                                                    } else if(error){
+                                                        setSubStatus("error");
+                                                        alert(error.message)
+                                                    }
+                                                })
+                                            }
+                                        }>Remove</Btn>
                                     </BtnDiv>
                                 </ToolDiv>
                             </React.Fragment>

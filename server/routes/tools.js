@@ -5,7 +5,8 @@
 const router = require('express').Router();
 
 const {
-    addTool, 
+    addTool,
+    deleteTool,
     getToolById,
     getTools,
     getToolsByOwnerId,
@@ -16,6 +17,7 @@ const {
 } = require("../handlers/toolsHandlers");
 
 router.post("/addTools", addTool);
+router.delete("/deleteTool/:_id", deleteTool)
 router.get("/getTools/:_id", getToolById);
 router.get("/getTools", getTools);
 router.get("/getOwnerTools/:ownerId", getToolsByOwnerId);

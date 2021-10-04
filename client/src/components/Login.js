@@ -98,7 +98,6 @@ const SigninForm = styled.form`
     border: solid 8px;
     border-image: linear-gradient(to top, black, #ff7366)1;
     padding: 15px;
-    border-radius: 5px;
 `;
 
 const SubmitInput = styled.input`

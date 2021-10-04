@@ -57,8 +57,39 @@ const addTool = async (req, res) => {
 
         res.status(200).json({status: 200, message: "Tool added successfully", data: data});
     } catch(err){
-        console.log("error", err);
         res.status(500).json({status: 500, data: err, message: "Cannot add tool"});
+    }
+
+    client.close();
+};
+
+// delete a tool from the database
+const deleteTool = async (req, res) => {
+
+    // create new client
+    const client = new MongoClient(MONGO_URI, options);
+
+    // connect to the client
+    await client.connect();
+
+    // connect the database
+    const db = client.db("toolbox");
+
+    try{
+        
+        // take tool id from url
+        const { _id } = req.params;
+
+        // find the tool in the "tools" collection
+        const tool = await db.collection("tools").findOne({ _id });
+
+        // delete the tool
+        await db.collection("tools").deleteOne({ _id });
+
+        res.status(200).json({status: 200, message: "Tool successfully removed"})
+
+    } catch(err){
+        res.status(500).json({status: 500, data: err, message: "Cannot delete tool"});
     }
 
     client.close();
@@ -284,4 +315,4 @@ const updateToolRenterId = async (req, res) => {
     client.close();
 }
 
-module.exports = { addTool, getToolById, getTools, getToolsByOwnerId, getToolsByRenterId, getManyTools, updateToolStatus, updateToolRenterId };
+module.exports = { addTool, deleteTool, getToolById, getTools, getToolsByOwnerId, getToolsByRenterId, getManyTools, updateToolStatus, updateToolRenterId };
