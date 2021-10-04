@@ -10,6 +10,13 @@ const options = {
 
 const { v4: uuidv4 } = require("uuid");
 
+let validateToolName = (name) => {
+
+    const re = /^[a-z0-9]{25}\s?-?[a-z0-9]{25}?$/i;
+
+    return re.test(name);
+}
+
 // add a tool for rent
 const addTool = async (req, res) => {
 
@@ -50,6 +57,12 @@ const addTool = async (req, res) => {
             toDate,
             _id:uuidv4()
         }
+
+        // tool name validation
+        // if(!validateToolName(data.toolName)){
+
+        //     return res.status(400).json({status: 400, message: "Tool name must contain only letters and numbers"});
+        // }
 
         // add tool data to the tools collection
         console.log("toolshandler", data);
