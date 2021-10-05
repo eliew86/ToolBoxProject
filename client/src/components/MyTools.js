@@ -156,6 +156,7 @@ const ToolsSpanDiv = styled.h1`
 
     position: absolute;
     left: 50%;
+    top: 100px;
     transform: translate(-50%, -50%);
     margin: 50px 0;
 `;
@@ -168,7 +169,7 @@ const ToolDiv = styled.div`
     border: solid 8px;
     border-image: linear-gradient(to left, black, #ff7366) 1 0;
     width: fit-content;
-    margin: 100px 0 10px 75px;
+    margin: 100px 0 0px 75px;
 `;
 
 const ToolInfoDiv = styled.div`
@@ -196,6 +197,7 @@ const Btn = styled.button`
     padding: 5px 10px 7px 10px;
     border-radius: 3px;
     margin: 10px 15px;
+    font-weight: bold;
 `;
 
 const NotRenting = styled.div`

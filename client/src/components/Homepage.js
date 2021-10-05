@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Tool from "./Tool";
 import Header from "./Header";
-import background from "../img/background.jpg";
 
 const Homepage = () => {
 

@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from "react";
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import Header from "./Header";
-import background from "../img/background.jpg";
 
 
 const MyRents = () => {
@@ -11,8 +10,7 @@ const MyRents = () => {
     const [status, setStatus] = useState("loading");
 
     const { renterId } = useParams();
-
-    console.log("renterId", renterId)
+    let history = useHistory();
 
     useEffect(() => {
 
@@ -64,6 +62,12 @@ const MyRents = () => {
                                     Renting from: {tool.ownerId}
                                 </ToolOwnerInfoDiv>
 
+                                <BtnDiv>
+                                    <Btn onClick={() => {history.push(`/chat`)}}>
+                                        chat
+                                    </Btn>
+                                </BtnDiv>
+
                             </ToolDiv>
                         </React.Fragment>
                     )
@@ -97,6 +101,7 @@ const ToolsSpanDiv = styled.h1`
 
     position: absolute;
     left: 50%;
+    top: 100px;
     transform: translate(-50%, -50%);
     margin: 50px 0;
 `;
@@ -130,6 +135,22 @@ const ToolImg = styled.img`
     object-fit: contain;
 `;
 
+const BtnDiv = styled.div`
+
+`;
+
+const Btn = styled.button`
+
+    background-color: black;
+    color: #ff7366;
+    border: none;
+    font-size: 15px;
+    padding: 5px 10px 7px 10px;
+    border-radius: 3px;
+    margin: 10px 15px;
+    font-weight: bold;
+`;
+
 const NotRenting = styled.div`
 
     position: absolute;
@@ -138,4 +159,6 @@ const NotRenting = styled.div`
     transform: translate(-50%, -50%);
     font-size: 25px;
 `;
+
+
 export default MyRents;

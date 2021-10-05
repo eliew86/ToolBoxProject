@@ -84,7 +84,7 @@ const Upload = () => {
                     history.push("/confirmedUpload");
                 } else if (error) {
                     setSubStatus("error");
-                    setErrMessage("Formdata post error");
+                    setErrMessage(data.message);
                 }
             } else {
                 alert("You must login to upload a tool for rent")
@@ -222,7 +222,7 @@ const H1logo = styled.h1`
     position: absolute;
     left: 50%;
     transform: translate(-50%, -50%);
-    top: 125px;
+    top: 150px;
 `;
 
 const Select = styled.select`

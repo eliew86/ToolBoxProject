@@ -13,6 +13,7 @@ import PaymentConfirmation from "./components/PaymentConfirmation";
 import MyTools from "./components/MyTools";
 import MyRents from "./components/MyRents";
 import GlobalStyle from "./components/GlobalStyle";
+import Chat from "./components/Chat";
 
 function App() {
     return (
@@ -59,6 +60,10 @@ function App() {
 
                     <Route path="/myrents/:renterId">
                         <MyRents />
+                    </Route>
+
+                    <Route path="/chat">
+                        <Chat />
                     </Route>
                 </Switch>
             </Main>

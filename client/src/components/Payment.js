@@ -191,7 +191,7 @@ const ToolInfo = styled.div`
     margin-right: 50px;
     padding: 30px;
     border: solid 8px;
-    border-image: linear-gradient(to top, black, orange) 1 0 0 1;
+    border-image: linear-gradient(to top, black, #ff7366) 1 0 0 1;
 `;
 
 const PaymentInfo = styled.div`
@@ -199,7 +199,7 @@ const PaymentInfo = styled.div`
     margin-left: 50px;
     padding: 30px;
     border: solid 8px;
-    border-image: linear-gradient(to top, black, orange) 0 1 1 0;
+    border-image: linear-gradient(to top, black, #ff7366) 0 1 1 0;
 `;
 
 const ToolInfoDiv = styled.div`

@@ -143,6 +143,8 @@ const LogoutBtn = styled.button`
     border-radius: 3px;
     width: fit-content;
     margin-top: 10px;
+    padding: 1px;
+    font-size: 12px;
 
     &:hover{
         color: #ff1500;
