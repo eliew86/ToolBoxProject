@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import ScrollToBottom from "react-scroll-to-bottom";
+import { GrPlayFill } from "react-icons/gr";
 
 const ChatComm = ({socket, username, room}) => {
 
     const [currentMessage, setCurrentMessage] = useState("");
     const [messageList, setMessageList] = useState([]);
 
+    const arrow = '$#9658;';
     const sendMessage = async () => {
 
         if(currentMessage !== "") {
@@ -21,6 +23,7 @@ const ChatComm = ({socket, username, room}) => {
 
             await socket.emit("send_message", messageData);
             setMessageList((list) => [...list, messageData]);
+            setCurrentMessage("");
         }
     }
 
@@ -59,11 +62,12 @@ const ChatComm = ({socket, username, room}) => {
             <div className="chat-footer">
                 <input 
                     type="text" 
-                    placeholder="Hey..."
+                    value={currentMessage}
+                    placeholder="Message..."
                     onChange={(event) => {setCurrentMessage(event.target.value)}}
                     onKeyPress={(event) => {event.key === "Enter" && sendMessage()}}
                 />
-                <button onClick={sendMessage}>$#9658;</button>
+                <button onClick={sendMessage} classNam="send"><GrPlayFill /></button>
             </div>
         </div>
     )
