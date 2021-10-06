@@ -57,8 +57,6 @@ const Upload = () => {
 
         console.log(file)
 
-        // setImage(file.secure_url)
-        console.log("cloudinary url", file.secure_url);
         setState("image-done-uploading")
 
         // post the form info to add a tool for rent
@@ -104,7 +102,7 @@ const Upload = () => {
 
             <Header />
             <MainWrap>
-                    <H1logo>Upload A tool!</H1logo>
+                    <H1logo>Upload A tool</H1logo>
 
                     <Form onSubmit={uploadImage} className="form">
 
@@ -132,6 +130,7 @@ const Upload = () => {
                                 <option value="">Type</option>
                                 <option value="manual">Manual</option>
                                 <option value="powertool">Power tool</option>
+                                <option value="useless">Useless</option>
                                 <option value="misc">Misc</option>
                             </Select>
                         </div>
@@ -215,6 +214,11 @@ const Submit = styled.button`
     border-radius: 3px;
     position: absolute;
     left: 40%;
+
+    &:hover{
+        color: #ff1500;
+        text-decoration: underline;
+    }
 `;
 
 const H1logo = styled.h1`

@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
-import background from "../img/background.jpg";
 
 import Header from "./Header";
 
 const Login = () => {
-
-    const user = localStorage.getItem('userId')
 
     const[userEmail, setUserEmail] = useState(null)
     const[userPw, setUserPw] = useState(null)
@@ -17,6 +14,8 @@ const Login = () => {
     const handleSubmit = (e) => {
 
         e.preventDefault();
+
+        // verify the userId(email) and password to login
         fetch('/getProfile', {
             method: 'POST',
             headers: {
@@ -39,10 +38,12 @@ const Login = () => {
         })
     }
 
+    // sets the value written in the input for the userEmail state
     const handleChangeId = (e) => {
         setUserEmail(e.target.value)
     }
 
+    // sets the value written in the input for the userPw state
     const handleChangePw = (e) => {
         setUserPw(e.target.value)
     }
@@ -106,6 +107,11 @@ const SubmitInput = styled.input`
     font-size: 15px;
     padding: 5px 10px 7px 10px;
     border-radius: 3px;
+
+    &:hover{
+        color: #ff1500;
+        text-decoration: underline;
+    }
 `;
 
 const SigninInput = styled.input`

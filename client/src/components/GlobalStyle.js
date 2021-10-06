@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-import background from "../img/background.jpg"; 
+import background from "../img/background.png"; 
 
 const GlobalStyle = createGlobalStyle`
     *{
@@ -11,9 +11,9 @@ const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
         margin: 0;
         background-image: url(${background});
-        background-color: black;
-        background-size: cover;
-        height: 100vh;
+        background-color: #FF851B;
+        background-size: contain;
+        object-fit: cover;
         background-attachment: fixed;
     }
 `;

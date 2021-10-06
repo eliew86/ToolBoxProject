@@ -12,6 +12,7 @@ app.use(cors());
 
 const server = http.createServer(app);
 
+// socket.io code for live messaging
 const io = new Server(server, {
   cors: {
     origin: "http://localhost:3000",
@@ -22,15 +23,18 @@ const io = new Server(server, {
 io.on("connection", (socket) => {
     console.log(`User Connected: ${socket.id}`);
 
+    // send user data when they join the room
     socket.on("join_room", (data) => {
         socket.join(data)
         console.log(`User with ID: ${socket.id} joined room: ${data}`)
     })
 
+    // sends the message to the front-end(to display for all the users in the room, I will try to make this 2 person rooms exclusively)
     socket.on("send_message", (data) => {
         socket.to(data.room).emit("receive_message", data)
     })
 
+    // disconnects the user if he leaves the page or clsoes the browser etc...
     socket.on("disconnect", () => {
         console.log("User Disconnected", socket.id)
     })

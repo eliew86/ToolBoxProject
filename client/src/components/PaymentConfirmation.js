@@ -1,16 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
-
 import Header from "./Header";
 
 const PaymentConfirmation = () => {
 
+    // takes the tool info from the local storage after payment has been complete
     const tool = JSON.parse(localStorage.getItem("paidRent"));
+
+    //takes the total price paid from the local storage 
     const totalPrice = localStorage.getItem("totalPrice");
 
+    // takes the from and to dates from the local storage
     const fromDate = localStorage.getItem("fromDate");
     const toDate = localStorage.getItem("toDate");
 
+    // displays all the info taken from the local storage
     return (
         <>
             <Header />

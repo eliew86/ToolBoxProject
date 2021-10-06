@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { useParams, Link } from "react-router-dom";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import background from "../img/background.jpg";
 
 import Header from "./Header";
 
@@ -20,7 +19,8 @@ const SingleTool = () => {
     const { _id } = useParams();
 
     useEffect(() => {
-
+        
+        // fetches the tool's info based on it's _id
         fetch(`/getTools/${_id}`)
             .then(res => res.json())
             .then(data => {
@@ -31,6 +31,8 @@ const SingleTool = () => {
 
     const onChange = (date) => {
 
+        // sets the appropriate from and to dates on the calendar
+        // also calculates the totalDays so we can calculate the totalprice
         setDate(date);
 
         const actualFromDate = date[0].toDateString()
@@ -39,14 +41,13 @@ const SingleTool = () => {
 
         setSelectedDate({...selectedDate, fromDate: actualFromDate, toDate: actualToDate})
         setTotalDays(Math.ceil((date[1]- date[0]) / (1000 * 60 * 60 * 24)))
-        console.log("totaldays", totalDays)
+
+        // send the fromDate, toDate & totalPrice to localStorage 
+        // to display them on the payment and payment confirmation pages
         window.localStorage.setItem("fromDate", actualFromDate);
         window.localStorage.setItem("toDate", actualToDate);
         window.localStorage.setItem("totalPrice", totalDaysCalc * tool.pricePerDay)
     }
-    
-    
-    console.log("Payment.js tool", tool)
 
     return (
         <Wrapper>  
@@ -104,6 +105,8 @@ const SingleTool = () => {
                             }
                         </BtnDiv>
                     </ToolDiv>
+                    
+                    {/* display the calendar to pick from and to dates */}
                     <CalendarDiv>
                         <Calendar
                             showWeekNumbers
@@ -188,7 +191,6 @@ const WarningSpanDiv = styled.div`
 `;
 
 const WarningDiv = styled.div`
-
 
 `;
 

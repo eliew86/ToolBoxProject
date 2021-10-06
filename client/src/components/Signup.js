@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
-import background from "../img/background.jpg";
 
 import Header from "./Header";
 
@@ -23,6 +22,7 @@ const Signup = () => {
     const [formData, setFormData] = useState(initialState);
     const [subStatus, setSubStatus] = useState("idle");
 
+    // on submit, creates the profile with the info from the inputs
     const handleSubmit = (e) => {
 
         e.preventDefault();
@@ -136,8 +136,7 @@ const SignupInput = styled.input`
 
 const SubmitInput = styled.input`
 
-width: fit-content;
-
+    width: fit-content;
     background-color: black;
     color: #ff7366;
     border: none;
@@ -145,6 +144,11 @@ width: fit-content;
     padding: 5px 10px 7px 10px;
     border-radius: 3px;
     width: fit-content;
+
+    &:hover{
+        color: #ff1500;
+        text-decoration: underline;
+    }
 `;
 
 export default Signup;

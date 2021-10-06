@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from "react";
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import Header from "./Header";
-import background from "../img/background.jpg";
 
 
 const MyTools = () => {
@@ -12,12 +11,11 @@ const MyTools = () => {
     const [subStatus, setSubStatus] = useState("idle");
 
     const { ownerId } = useParams();
-    const { _id } = useParams();
-    console.log("tools", tools)
+    let history = useHistory();
 
     useEffect(() => {
 
-
+        // fetch all the tools the current user has up for rent
         fetch(`/getOwnerTools/${ownerId}`)
         .then(res => res.json())
         .then(data => {
@@ -27,12 +25,6 @@ const MyTools = () => {
             })
         .catch(error => console.log("home fetch error: ", error))
     }, [])
-
-    const removeTool = (e) => {
-
-
-        
-    }
 
     return (
         <Wrapper>
@@ -67,9 +59,9 @@ const MyTools = () => {
                                     <BtnDiv>
                                         {
                                             !tool.isAvailable ? 
+                                            // the owner can update the tool availability manually
+                                            // when the tool rental period is over or if the tool was returned earlier
                                             <Btn onClick={
-                                                // the owner can update the tool availability manually
-                                                // when the tool rental period is over or if the tool was returned earlier
                                                 (e) => {
         
                                                     const _id = tool._id;
@@ -94,13 +86,15 @@ const MyTools = () => {
                                                     })
 
                                                 }
-                                            }>Make Available</Btn> :
+                                            }>Post</Btn> :
                                             ""
                                         }
 
+                                        {/* 
+                                            delete the item from the "tools" collection
+                                            I'm doing it here because I have direct access to the tool _id  
+                                        */}
                                         <Btn onClick={
-                                            // delete the item from the "tools" collection
-                                            // I'm doing it here because I have direct access to the tool _id 
                                             (e) => {
                                                 e.preventDefault();
                                                 setSubStatus("pending");
@@ -123,6 +117,11 @@ const MyTools = () => {
                                                 })
                                             }
                                         }>Remove</Btn>
+
+                                        {/* button that send user to the chat page */}
+                                        <Btn onClick={() => {history.push(`/chat`)}}>
+                                            Chat
+                                        </Btn>
                                     </BtnDiv>
                                 </ToolDiv>
                             </React.Fragment>
@@ -168,7 +167,7 @@ const ToolDiv = styled.div`
     align-items: center;
     border: solid 8px;
     border-image: linear-gradient(to left, black, #ff7366) 1 0;
-    width: fit-content;
+    width: 300px;
     margin: 100px 0 0px 75px;
 `;
 

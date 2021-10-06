@@ -1,5 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
-import TextField from "@material-ui/core/TextField"
+import React, { useState } from "react";
 import styled from "styled-components";
 import io from "socket.io-client";
 import Header from "./Header";
@@ -15,6 +14,7 @@ const Chat = () => {
     const [room, setRoom] = useState("")
     const [showChat, setShowChat] = useState(false);
 	
+    // joins a room and sets showChat to true after the user filled the name and room inputs
     const joinRoom = () => {
 
         if(username !== "" && room !== "") {
@@ -27,6 +27,7 @@ const Chat = () => {
         <>
             <Header />
             <Wrapper>
+                {/* if showchat is true, display the live chat*/}
                 <div className="App">
                     {!showChat ? (
                     <div className="joinChatContainer">

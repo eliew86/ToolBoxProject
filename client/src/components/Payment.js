@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 import { useHistory, useParams } from "react-router-dom";
-import background from "../img/background.jpg";
 import Header from "./Header";
 
 const initialState = {
@@ -17,7 +16,6 @@ const Payment = () => {
     const [status, setStatus] = useState("loading");
     const [ccFormData, setCcFormData] = useState(initialState);
     const [subStatus, setSubStatus] = useState("idle");
-    // const [flag, setFlag ] = useState(false);
 
     let history = useHistory();
     const user = localStorage.getItem('user');
@@ -28,10 +26,10 @@ const Payment = () => {
 
     useEffect(() => {
 
+        // fetches the tool by it's _id
         fetch(`/getTools/${_id}`)
             .then(res => res.json())
             .then(data => {
-                console.log("Payment", data.data)
                 setTool(data.data)
                 setStatus('idle')
             })
@@ -42,6 +40,7 @@ const Payment = () => {
         e.preventDefault();
         setSubStatus("pending");
 
+        // validate the card info for payment
         fetch("/paymentValidate", {
             method: "POST",
             body: JSON.stringify(ccFormData),
@@ -56,6 +55,7 @@ const Payment = () => {
             if(status === 200){
                 window.localStorage.setItem("paidRent", JSON.stringify(tool));
 
+                // if payment went through, update the tool's info with the renterId and the return date of the tool
                 fetch(`/renterIdUpdate/${_id}`, {
                     method: "PATCH",
                     body: JSON.stringify({

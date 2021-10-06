@@ -4,9 +4,9 @@ import Header from "./Header";
 
 const ConfirmedUpload = () => {
 
+    // tool info taken from the localStorage to render on the page
     const formData = JSON.parse(localStorage.getItem("formData"));
 
-    console.log("confirmedUpload formData", formData);
     return (
         <>  
             <Header />

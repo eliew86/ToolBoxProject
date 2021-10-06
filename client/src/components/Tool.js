@@ -1,11 +1,14 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 
-const Tool = ({ _id, category, city, pricePerDay, toolName, type, imgUrl, isAvailable}) => {
+// render each tool's info
+const Tool = ({ _id, city, pricePerDay, toolName, imgUrl, isAvailable}) => {
 
     let history = useHistory();
 
+    // if the user clicks on the tool images, he gets sent to the tools info page
+    // where he can also choose to rent the tool
     function handleClick(){
         history.push(`/getTools/${_id}`)
     }
@@ -21,7 +24,7 @@ const Tool = ({ _id, category, city, pricePerDay, toolName, type, imgUrl, isAvai
                         </ToolInfoDiv>
 
                         <ToolInfoDiv>
-                            {pricePerDay}$/day
+                            {pricePerDay} $/day
                         </ToolInfoDiv>
 
                         <ToolInfoDiv>

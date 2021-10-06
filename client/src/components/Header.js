@@ -5,9 +5,11 @@ import { useHistory } from "react-router-dom";
 
 const Header = () => {
 
+    // sets the user name from the localStorage
     const user = localStorage.getItem("user");
     let history = useHistory();
 
+    // logsout a signed in user
     const handleLogout = () => {
 
         window.localStorage.setItem("user", "");
@@ -22,30 +24,32 @@ const Header = () => {
 
                 <Links>
                     
+                    {/* if a user is loged in, show the menu */}
+                    {
+                        user ? 
+                        <>
+                            <Nav>
+                                    <StyledNavLink to={`/mytools/${user}`}>My Tools</StyledNavLink> 
+                                    
+                                
+                            </Nav>
 
-                    <Nav1>
-                        {
-                            user ? 
-                            <StyledNavLink to={`/mytools/${user}`}>My Tools</StyledNavLink> :
-                            ""
-                        }
-                    </Nav1>
+                            <Nav>
+                                
+                                    <StyledNavLink to={`/myrents/${user}`}>My Rents</StyledNavLink> 
+                                    
+                                
+                            </Nav>
 
-                    <Nav1>
-                        {
-                            user ? 
-                            <StyledNavLink to={`/myrents/${user}`}>My Rents</StyledNavLink> :
+                            <Nav>
+                                
+                                    <StyledNavLink to="/upload">Upload Tool</StyledNavLink> 
+                                    
+                            </Nav> 
+                        </> :
+                                
                             ""
-                        }
-                    </Nav1>
-
-                    <Nav1>
-                        {
-                            user ? 
-                            <StyledNavLink to="/upload">Upload Tool</StyledNavLink> :
-                            ""
-                        }
-                    </Nav1>
+                    }
 
                     <LoginLoged>
                         {
@@ -91,7 +95,7 @@ const LoginLoged = styled.nav`
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 `;
 
-const Nav1 = styled.nav`
+const Nav = styled.nav`
 
     font-size: 20px;
     margin-right: 100px;

@@ -1,4 +1,3 @@
-import { load } from "dotenv";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Tool from "./Tool";
@@ -8,11 +7,10 @@ const Homepage = () => {
 
     const [status, setStatus] = useState("leading");
     const [tools, setTools] = useState([]);
-    const [start, setStart] = useState(0);
-    const [filter, setFilter] = useState(null);
 
     useEffect(() => {
 
+        // sets the tool collection from the database to the tools state
         fetch('/getTools')
         .then(res => res.json())
         .then(data => {
@@ -33,6 +31,7 @@ const Homepage = () => {
 
                             <ToolsDiv>
                                 {
+                                    // maps the tools array to display each available tool
                                     tools.map(tool => {
                                         
                                         return(

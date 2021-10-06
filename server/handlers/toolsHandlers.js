@@ -10,13 +10,6 @@ const options = {
 
 const { v4: uuidv4 } = require("uuid");
 
-let validateToolName = (name) => {
-
-    const re = /^[a-z0-9]{25}\s?-?[a-z0-9]{25}?$/i;
-
-    return re.test(name);
-}
-
 // add a tool for rent
 const addTool = async (req, res) => {
 
@@ -58,14 +51,7 @@ const addTool = async (req, res) => {
             _id:uuidv4()
         }
 
-        // tool name validation
-        // if(!validateToolName(data.toolName)){
-
-        //     return res.status(400).json({status: 400, message: "Tool name must contain only letters and numbers"});
-        // }
-
         // add tool data to the tools collection
-        console.log("toolshandler", data);
         await db.collection("tools").insertOne(data);
 
         res.status(200).json({status: 200, message: "Tool added successfully", data: data});
@@ -94,7 +80,7 @@ const deleteTool = async (req, res) => {
         const { _id } = req.params;
 
         // find the tool in the "tools" collection
-        const tool = await db.collection("tools").findOne({ _id });
+        await db.collection("tools").findOne({ _id });
 
         // delete the tool
         await db.collection("tools").deleteOne({ _id });
@@ -122,6 +108,7 @@ const getToolById = async (req, res) => {
 
     const { _id } = req.params;
 
+    // looks for a specefic tool baser on it's _id
     db.collection("tools").findOne({_id}, (err, result) => {
 
         result  
@@ -145,6 +132,7 @@ const getToolsByOwnerId = async (req, res) => {
 
     const { ownerId } = req.params;
 
+    // looks for all the tools with the same ownerId
     const tools = await db.collection("tools").find({ownerId}).toArray();
 
     if(tools){
@@ -185,7 +173,8 @@ const getToolsByRenterId = async (req, res) => {
     client.close();
 }
 
-// get tools using req.query start and limit
+// get tools using req.query start and limit, I'm not using it currently in the front-end
+// But I have ideas for it
 const getManyTools = async (req, res) => {
 
     

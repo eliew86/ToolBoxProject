@@ -14,6 +14,7 @@ const MyRents = () => {
 
     useEffect(() => {
 
+        // fetches the currently loged in users rented tools
         fetch(`/getRentedTools/${renterId}`)
         .then(res => res.json())
         .then(data => {
@@ -30,6 +31,7 @@ const MyRents = () => {
             <ToolsSpanDiv>Currently Renting</ToolsSpanDiv>
             <ToolsDiv>
             {
+                // if the user is renting tools, display each one
                 tools.length ?
                 tools.map(tool => {
 
@@ -113,7 +115,7 @@ const ToolDiv = styled.div`
     align-items: center;
     border: solid 8px;
     border-image: linear-gradient(to left, black, #ff7366) 1 0;
-    width: fit-content;
+    width: 300px;
     margin: 100px 0 10px 75px;
 `;
 

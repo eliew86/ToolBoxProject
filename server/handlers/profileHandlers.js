@@ -8,8 +8,6 @@ const options = {
     useUnifiedTopology: true,
 };
 
-const { v4: uuidv4 } = require("uuid");
-
 // add a profile to the database
 const addProfile = async (req, res) => {
 
@@ -61,10 +59,6 @@ const addProfile = async (req, res) => {
 // get a profile by email(for signin)
 const getProfileByEmail = async (req, res) => {
 
-    /*
-        validate password
-    */
-
     // create the client
     const client = new MongoClient(MONGO_URI, options);
 
@@ -74,21 +68,24 @@ const getProfileByEmail = async (req, res) => {
     // connect to the database
     const db = client.db("toolbox");
 
+    // takes the email and pw put in by the user
     const { password, email } = req.body;
 
+    // checks the profiles collection for a matching email
     db.collection("profiles").findOne({_id: email}, (err, result) => {
 
         if(result){
+            // if profile found and the pw match return a 200
             if(result.password === password){
 
                 res.status(200).json({status: 200, email, data: result});
             } else {
                 
-                res.status(400).json({status: 400, email, data:"username/password mismatch", err});
+                res.status(400).json({status: 400, email, message:"username/password mismatch", data: err});
             }
         } else {
 
-            res.status(400).json({status: 400, email, data: err, message:"Profile not found"});
+            res.status(400).json({status: 400, email, message:"Profile not found", data: err});
         }
         client.close();
     });
